@@ -4,9 +4,10 @@ public class KillCilantro {
    
       int index = 0;
       String killWord = "cilantro";
+      String newWord = "parsley";
       while (text.indexOf(killWord) >= 0) {
          index = text.indexOf(killWord);
-         text = text.substring(0, index) + "parsley" + text.substring(index + killWord.length(), text.length());
+         text = text.substring(0, index) + newWord + text.substring(index + killWord.length(), text.length());
          index = text.indexOf(killWord);
       }
       return text;
