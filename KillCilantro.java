@@ -5,16 +5,15 @@ import java.util.ArrayList;
 public class KillCilantro {
 
    public static String killCilantro(String text, ArrayList<ArrayList<String>> changes, int numPairs) {
-      for (int i = 0; i < numPairs; i++) {
+      for (int i = 0; i < numPairs; i++) { //Repeats for each pair
          int index = 0;
-         String killWord = changes.get(i).get(0);
-         String newWord = changes.get(i).get(1);
-         while (text.indexOf(killWord) >= 0) {
-            index = text.indexOf(killWord);
-            text = text.substring(0, index) + newWord + text.substring(index + killWord.length(), text.length());
-            index = text.indexOf(killWord);
+         String killWord = changes.get(i).get(0); //First word in the pair
+         String newWord = changes.get(i).get(1); //Second word in the pair
+         for (int j = 0; j < (text.length() - killWord.length() + 1); j++) { //Repeats until the killWord would no longer fit in the string
+            if (text.substring(j, j + killWord.length()).equalsIgnoreCase(killWord)) {
+               text = text.substring(0, j) + newWord + text.substring(j + killWord.length(), text.length());
+            }
          }
-         
       }
       return text;
    }
@@ -23,11 +22,11 @@ public class KillCilantro {
       Scanner input = new Scanner(System.in);
       System.out.println("How many words do you want to replace?");
       int numKills = input.nextInt();
-      input.nextLine();
+      input.nextLine(); //Uses \n to prevent input errors
 
       ArrayList<ArrayList<String>> words = new ArrayList<>();
       for (int i = 0; i < numKills; i++) {
-         words.add(new ArrayList<>());
+         words.add(new ArrayList<>()); //Creates pairs
       }
       for (int j = 0; j < numKills; j++) {
          System.out.println("What word do you want to replace? (" + (j + 1) + ")");
